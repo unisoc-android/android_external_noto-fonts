@@ -149,5 +149,13 @@ def main(argv):
         with open(os.path.join(argv[3], '%s_new.png' % key), 'w') as f:
             f.write(image2)
 
+
+def print_usage():
+    """Prints how to use the script."""
+    print("usage: old_font new_font output_dir")
+
 if __name__ == '__main__':
-  main(sys.argv)
+   if len(sys.argv) < 3:
+       print_usage()
+       sys.exit(1)
+   main(sys.argv)
