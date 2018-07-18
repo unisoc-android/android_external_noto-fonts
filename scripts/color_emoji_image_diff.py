@@ -16,10 +16,12 @@
 
 import contextlib
 import itertools
+import io
 import os
 import sys
 
 from fontTools import ttLib
+from PIL import Image
 
 def to_hex_str(value):
     """Converts given int value to hex without the 0x prefix"""
@@ -104,8 +106,28 @@ def read_cbdt(ttf):
   for strike_data in cbdt.strikeData:
     for key, data in strike_data.iteritems():
       data.decompile
-      glyph_to_image[key] = data.imageData
+      glyph_to_image[key] = Image.open(io.BytesIO(data.imageData))
   return glyph_to_image
+
+
+rgba_map = {}
+
+def similar_img(img1, img2):
+    # return if images are the same with accepting some changes
+    if img1 is None and img2 is None: return True
+    if img1 is None or img2 is None: return False
+    if not img1.size == img2.size: return False
+
+    pixels1 = rgba_map.get(img1, img1.convert('L').getdata())
+    pixels2 = rgba_map.get(img2, img2.convert('L').getdata())
+    pixels = itertools.izip(pixels1, pixels2)
+    diff = 0
+    for px1, px2 in pixels:
+        diff = diff + abs(px1-px2)
+    pixel_count = 1.0 * img1.size[0] * img1.size[1]
+    normalized_diff = diff / pixel_count / 255.0 * 100.0
+    if normalized_diff <= 0.5: return True
+    return False
 
 def main(argv):
   codepoint_map_1 = {}
@@ -140,14 +162,14 @@ def main(argv):
     image1 = font1_cbdt[glyph1] if glyph1 and glyph1 in font1_cbdt else None
     image2 = font2_cbdt[glyph2] if glyph2 and glyph2 in font2_cbdt else None
 
-    if image1 != image2:
+    if not similar_img(image1, image2):
       print 'Glyph %s has different image' % key
       if image1:
         with open(os.path.join(argv[3], '%s_old.png' % key), 'w') as f:
-            f.write(image1)
+            image1.save(f)
       if image2:
         with open(os.path.join(argv[3], '%s_new.png' % key), 'w') as f:
-            f.write(image2)
+            image2.save(f)
 
 
 def print_usage():
