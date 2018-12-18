@@ -117,7 +117,7 @@ font_src_files += \
     NotoSansBuhid-Regular.ttf \
     NotoSansCanadianAboriginal-Regular.ttf \
     NotoSansCarian-Regular.ttf \
-    NotoSansChakma-Regular.ttf \
+    NotoSansChakma-Regular.otf \
     NotoSansCham-Bold.ttf \
     NotoSansCham-Regular.ttf \
     NotoSansCherokee-Regular.ttf \
