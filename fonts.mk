@@ -124,8 +124,8 @@ PRODUCT_PACKAGES := \
     NotoSansMyanmar-Bold.otf \
     NotoSansMyanmar-Medium.otf \
     NotoSansMyanmar-Regular.otf \
-    NotoSansMyanmarUI-Bold.otf \
-    NotoSansMyanmarUI-Medium.otf \
+    NotoSansMyanmarUI-Bold-ZawDecode.ttf \
+    NotoSansMyanmarUI-Regular-ZawDecode.ttf \
     NotoSansMyanmarUI-Regular.otf \
     NotoSansNabataean-Regular.otf \
     NotoSansNewa-Regular.otf \
