@@ -121,9 +121,8 @@ PRODUCT_PACKAGES := \
     NotoSansMongolian-Regular.ttf \
     NotoSansMro-Regular.otf \
     NotoSansMultani-Regular.otf \
-    NotoSansMyanmar-Bold.otf \
-    NotoSansMyanmar-Medium.otf \
-    NotoSansMyanmar-Regular.otf \
+    NotoSansMyanmar-Bold-ZawDecode.ttf \
+    NotoSansMyanmar-Regular-ZawDecode.ttf \
     NotoSansMyanmarUI-Bold-ZawDecode.ttf \
     NotoSansMyanmarUI-Regular-ZawDecode.ttf \
     NotoSansNabataean-Regular.otf \
